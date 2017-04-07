@@ -1,0 +1,41 @@
+[스프링 프로젝트 설정하기]
+
+[1] web.xml 설정
+- 모든 .do 요청이 DispatcherServlet으로 집중되도록 
+
+- 요청 파라미터에 대한 한글 인코딩 처리 - fiter이용
+
+[2] Controller 작성 - Controller 클래스 만들기
+
+[3] 스프링 설정파일 셋팅
+- Spring MVC 설정 파일인 dispatcher-servlet.xml 파일에 HandlerMapping, Controller, ViewResolver 를 등록한다
+
+[4] view 작성 - jsp 만들기
+
+
+http://localhost:9090/myspring1/hello2.do
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

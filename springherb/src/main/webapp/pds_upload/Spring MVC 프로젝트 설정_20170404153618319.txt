@@ -1,0 +1,110 @@
+[1] Spring MVC 프로젝트 만들기
+
+New - Spring legacy Project
+- Spring MVC Project
+
+[2] web.xml
+위치 :  WEB-INF/
+
+1) 모든 *.do 요청을 DispatcherServlet 이 받도록 설정
+   DispatcherServlet 에서 사용할 스프링 설정파일 지정 
+   - 웹에 종속적인 빈 관리 [자식]
+2) 웹어플리케이션 전체(springherb)에서 사용할 
+스프링 설정 파일 지정
+   - 웹에 종속적이지 않은 빈 관리 [부모]
+3) 한글 인코딩 필터 설정
+
+[3] servlet-context.xml
+위치 : src\main\webapp\WEB-INF\spring\appServlet
+웹에 종속적인 스프링 설정파일
+
+1) viewResolver 설정
+논리적인 뷰 이름에 접두사, 접미사 지정
+
+2) <context:component-scan ...
+@Controller annotation이 붙은 빈을 자동으로 등록해주도록
+
+3) <annotation-driven />
+애노테이션 방식의 컨트롤러를 사용할 때 필요한 DispatcherServlet 전략빈을 
+자동으로 등록해줌
+
+4)
+	<resources mapping="/resources/**" location="/resources/" />
+	<default-servlet-handler/>
+
+/resources/** 는 DispatcherServlet이 걸르지 않도록 지정
+
+[4] 웹에 종속적이지 않은 스프링 설정파일
+웹 어플리테이션(springherb) 전체에서 사용하는 설정파일
+
+위치: src\main\resources\config\spring
+
+(1) context-common.xml
+1) <context:component-scan  ..
+@Controller 어노테이션이 붙은 빈을 제외한 나머지 빈들을 자동으로 
+등록해주도록 설정
+
+2) MultipartResolver
+파일 업로드 관련 설정
+
+
+(2) context-database.xml
+- 데이터베이스 관련 설정
+
+1) 데이터베이스 연결정보 지정
+dataSource
+
+2) 트랜잭션 관리자, 트랜잭션 처리 관련 설정
+<bean id="transactionManager"...
+
+<tx:annotation-driven />
+
+3) Mybatis 객체 설정
+sqlSessionFactoryBean
+
+
+[5] database.properties
+위치 : src\main\resources\config\props
+
+context-database.xml 에서 사용할 DB연결 정보들이
+들어있는 프로퍼티 파일
+
+[6] mybatis-config.xml
+위치: src\main\resources\config\mybatis\oracle
+
+마이바티스 설정 파일
+
+[7] 매퍼 xml
+위치: src\main\resources\config\mybatis\mapper\oracle
+
+[8] pom.xml
+maven 설정 파일
+
+위치 : sp_ws\springherb
+   
+<dependencies>
+
+<repositories>
+
+카피
+
+[9] log4j.xml
+
+로깅 설정 파일
+
+위치 : src\main\resources
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

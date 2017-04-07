@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.pd">
+	<insert id="insertPd" parameterType="PdDTO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select pd_seq.nextval from dual
+		</selectKey>
+		insert into pd(no, pdname, price)
+			values(#{no}, #{pdName}, #{price})
+	</insert>
+	
+	<select id="pdSelectAll" resultType="PdDTO">
+		select * from pd order by no desc
+	</select>
+	
+	<select id="pdSelectByNo" parameterType="int" 
+		resultType="PdDTO">
+		select * from pd where no=#{no}
+	</select>
+	
+	<update id="pdUpdate" parameterType="PdDTO">
+		update pd
+			set pdname=#{pdName}, price=#{price}
+		where no=#{no}
+	</update>
+	
+	<delete id="pdDelete" parameterType="int">
+		delete pd where no=#{no}
+	</delete>
+	
+	<!-- 컬럼명의 underscore를 camelCase로 변환하는 방법1 
+		- 별칭을 이용
+	-->
+	
+	<!-- <select id="cmtSelect" resultType="CommentVO">
+		select comment_no as commentNo, user_id as userId, 
+		    reg_date as regDate, comment_content as commentContent
+		 from comment2 order by comment_no desc
+	</select> -->
+	
+	<!--  방법 2 
+		- resultMap 이용
+	-->
+	<!-- <resultMap type="CommentVO" id="commentResult">
+		<id column="comment_no" property="commentNo" 
+			jdbcType="BIGINT"/>
+		<result column="user_id" property="userId" 
+			jdbcType="VARCHAR"/>
+		<result column="reg_date" property="regDate" 
+			jdbcType="TIMESTAMP"/>
+		<result column="comment_content" property="commentContent" 
+			jdbcType="VARCHAR"/>		
+	</resultMap>
+	
+	<select id="cmtSelect" resultMap="commentResult">
+		select comment_no, user_id, reg_date, comment_content
+ 		from comment2 order by comment_no desc
+	</select> -->
+	
+	<!-- 방법3
+		mybatis 설정 파일에서 mapUnderScoreToCamelCase를 true로 설정
+	 -->
+	<select id="cmtSelect" resultType="CommentVO">
+		select comment_no, user_id, reg_date, comment_content
+ 		from comment2 order by comment_no desc
+	</select>
+	
+	 
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
